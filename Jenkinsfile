@@ -41,7 +41,7 @@ def buildAndTest (def gccvers, def DEVITO_BACKEND=null, def DEVITO_OPENMP=0, def
         // Using the built container, run tests
         customImage.inside("-e DEVITO_OPENMP=${DEVITO_OPENMP} -e OMP_NUM_THREADS=${OMP_NUM_THREADS}") {
             sh "flake8 --builtins=ArgumentError ."
-            sh "py.test -n 2 -vs --cov"
+            sh "py.test -vs --cov"
             // Additional seismic operator tests
             if ( DEVITO_BACKEND!='yask' ) {
                 sh "DEVITO_BACKEND=foreign py.test -vs tests/test_operator.py -k TestForeign"

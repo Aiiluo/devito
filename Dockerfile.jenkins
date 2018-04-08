@@ -75,8 +75,6 @@ ENV CONDA_SHLVL="1"
 ENV PATH="/usr/local/miniconda/envs/devito/bin:$PATH"
 # Now install devito into the virtualenv
 RUN pip install -e .
-# Add in parallel testing
-RUN pip install pytest-xdist
 # Debugging step to finish
 RUN conda list
 
