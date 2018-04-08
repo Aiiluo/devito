@@ -11,7 +11,7 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv 1E9377A2BA9EF27F
 RUN gpg --export --armor BA9EF27F | apt-key add -
 
 # Upgrade to the most recent package set
-#RUN apt-get update
+RUN apt-get update
 #RUN apt-get -y dist-upgrade
 
 # Needed for the conda and devito installs later
