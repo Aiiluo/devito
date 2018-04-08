@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM travisci/ci-garnet:packer-1512502276-986baf0
 
 # This DockerFile is looked after by
 MAINTAINER Tim Greaves <tim.greaves@imperial.ac.uk>
