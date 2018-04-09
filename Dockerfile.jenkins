@@ -106,4 +106,8 @@ ENV MPLBACKEND=PS
 ENV CODECOV_TOKEN=67a18b2a-77f0-4722-9c88-bc1a098473ce
 
 # By default, start the container in the devito directory
-WORKDIR /usr/local/devito
+WORKDIR /local
+# Make the directory fully accessable
+RUN find . -exec chmod a+rw '{}' \;
+RUN find . -executable -exec chmod a+x '{}' \;
+
