@@ -276,6 +276,26 @@ class DerivedDimension(Dimension):
     def _arg_names(self):
         return self.parent._arg_names
 
+    def _arg_defaults(self, **kwargs):
+        """
+        A :class:`DerivedDimension` provides no arguments, so this
+        method returns an empty dict.
+        """
+        return {}
+
+    def _arg_values(self, *args, **kwargs):
+        """
+        A :class:`DerivedDimension` provides no arguments, so there are
+        no argument values to be derived.
+        """
+        return {}
+
+    def _arg_check(self, *args):
+        """
+        A :class:`DerivedDimension` performs no runtime checks.
+        """
+        return
+
 
 class SubDimension(DerivedDimension):
 
@@ -325,13 +345,6 @@ class SubDimension(DerivedDimension):
     def _hashable_content(self):
         return (self.parent._hashable_content(), self._interval)
 
-    def _arg_values(self, *args, **kwargs):
-        """
-        A :class:`SubDimension` provides no arguments, so there are
-        no argument values to be derived.
-        """
-        return {}
-
 
 class ConditionalDimension(DerivedDimension):
 
@@ -366,27 +379,6 @@ class ConditionalDimension(DerivedDimension):
 
     def _hashable_content(self):
         return (self.parent._hashable_content(), self.factor, self.condition)
-
-    def _arg_defaults(self, **kwargs):
-        """
-        A :class:`ConditionalDimension` provides no arguments, so this
-        method returns an empty dict.
-        """
-        return {}
-
-    def _arg_values(self, *args, **kwargs):
-        """
-        A :class:`ConditionalDimension` provides no arguments, so there are
-        no argument values to be derived.
-        """
-        return {}
-
-    def _arg_check(self, *args):
-        """
-        A :class:`ConditionalDimension` provides no arguments, so there are
-        no checks to be performed.
-        """
-        return
 
 
 class SteppingDimension(DerivedDimension):
@@ -446,6 +438,10 @@ class SteppingDimension(DerivedDimension):
         return {self.parent.min_name: start}
 
     def _arg_values(self, *args, **kwargs):
+        """
+        The argument values provided by a :class:`SteppingDimension` are those
+        of its parent, as it acts as an alias.
+        """
         values = {}
 
         if self.min_name in kwargs:
@@ -459,9 +455,6 @@ class SteppingDimension(DerivedDimension):
             values[self.parent.max_name] = kwargs.pop(self.name)
 
         return values
-
-    def _arg_check(self, *args):
-        return
 
 
 class LoweredDimension(Dimension):
